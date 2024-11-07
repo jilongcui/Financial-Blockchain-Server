@@ -40,6 +40,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -61,7 +62,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableTransactionManagement
 @EnableSwagger2
 @EnableAspectJAutoProxy(exposeProxy = true)
-@MapperScan("com.webank.webase.node.mgr")
+@ComponentScan(basePackages = {"com.webank.webase.node.mgr", "com.xiaohe.financial"})
+@MapperScan({"com.webank.webase.node.mgr", "com.xiaohe.financial"})
 public class Application {
 
     public static void main(String[] args) {

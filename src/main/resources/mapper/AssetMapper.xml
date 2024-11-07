@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaohe.financial.asset.AssetMapper">
+    <resultMap id="assetMap" type="com.xiaohe.financial.asset.entity.TbAsset">
+        <id column="id" property="id"/>
+        <result column="asset_name" property="assetName"/>
+        <result column="asset_type" property="assetType"/>
+        <result column="cid" property="cid"/>
+        <result column="target_company" property="targetCompany"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <insert id="addAsset" parameterType="com.xiaohe.financial.asset.entity.TbAsset">
+        insert into tb_asset(asset_name, asset_type, cid, target_company, create_time)
+        values(#{assetName}, #{assetType}, #{cid}, #{targetCompany}, #{createTime})
+    </insert>
+
+    <!-- Select method by name -->
+    <select id="selectByName" parameterType="string" resultMap="assetMap">
+        SELECT * FROM tb_asset WHERE asset_name = #{assetName}
+    </select>
+</mapper>
