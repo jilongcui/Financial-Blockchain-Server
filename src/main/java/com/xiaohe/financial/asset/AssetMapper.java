@@ -1,8 +1,11 @@
 package com.xiaohe.financial.asset;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.xiaohe.financial.asset.entity.AssetParam;
 import com.xiaohe.financial.asset.entity.TbAsset;
 
 @Repository
@@ -36,5 +39,9 @@ public interface AssetMapper {
      * @return TbAsset
      */
     
+    /** 
+     * list asset by page
+     **/
+    List<TbAsset> listOfAsset(AssetParam assetParam);
 
 }

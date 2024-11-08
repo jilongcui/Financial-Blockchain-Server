@@ -21,4 +21,50 @@
     <select id="selectByName" parameterType="string" resultMap="assetMap">
         SELECT * FROM tb_asset WHERE asset_name = #{assetName}
     </select>
+
+    <select id="selectById" parameterType="int" resultMap="assetMap">
+        SELECT * FROM tb_asset WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="assetMap">
+        SELECT * FROM tb_asset
+    </select>
+
+    <select id="listOfAsset" parameterType="com.xiaohe.financial.asset.entity.AssetParam" resultMap="assetMap">
+        SELECT * FROM tb_asset where 1=1
+        <!-- <where> -->
+            <if test="assetName != null and assetName != ''">
+                and asset_name like concat('%',#{assetName},'%')
+            </if>
+            <if test="assetType != null and assetType != ''">
+                and asset_type = #{assetType}
+            </if>
+            <!-- <if test="assetStatus != null and assetStatus != ''">
+                and asset_status = #{assetStatus}
+            </if> -->
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="flagSortedByTime != null and flagSortedByTime != ''">
+                order by create_time ${flagSortedByTime}
+            </if>
+            <if test="start != null and pageSize != null">
+                limit #{start},#{pageSize}
+            </if>
+        <!-- </where> -->
+    </select>
+
+    <update id="update" parameterType="com.xiaohe.financial.asset.entity.TbAsset">
+        update tb_asset
+        <set>
+            <if test="assetName != null">asset_name = #{assetName},</if>
+            <if test="assetType != null">asset_type = #{assetType},</if>
+            <if test="cid != null">cid = #{cid},</if>
+            <if test="targetCompany != null">target_company = #{targetCompany},</if>
+        </set>
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM tb_asset WHERE id = #{id}
+    </delete>
 </mapper>
