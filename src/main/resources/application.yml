@@ -27,9 +27,9 @@ mybatis:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/webasenodemanager?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
-    username: defaultAccount
-    password: defaultPassword
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_NAME:webasenodemanager}?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: ${DB_USERNAME:defaultAccount}
+    password: ${DB_PASSWORD:defaultPassword}
     initialSize: 10
     minIdle: 5
     maxActive: 30
@@ -47,6 +47,12 @@ logging:
   config: classpath:log/log4j2.xml
   level:
     com.webank.webase.node.mgr: info
+    com.xiaohe.financial: debug
+
+# MyBatis特定日志设置
+#log4j:
+#  logger:
+#    org.apache.ibatis=info
 
 #constants
 constant:
